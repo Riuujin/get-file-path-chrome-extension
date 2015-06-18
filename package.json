@@ -1,0 +1,35 @@
+{
+  "name": "get-file-path-extension",
+  "description": "Get the file path for the specified sites.",
+  "version": "0.0.6",
+  "authors": [
+    "Rutger Spruyt <riuujin@raspruyt.nl>"
+  ],
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-ignore": "^1.2.1",
+    "gulp-sass": "^2.0.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "node-notifier": "^4.2.1",
+    "reactify": "^1.1.1",
+    "require-dir": "^0.3.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "lodash": "^3.9.3",
+    "marked": "^0.3.3",
+    "materialize-css": "^0.96.1",
+    "node-uuid": "^1.4.3",
+    "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7",
+    "url": "^0.10.3"
+  }
+}
