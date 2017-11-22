@@ -1,0 +1,49 @@
+{
+    "rules": [
+        {
+            "conditions": [
+                "http://MyAmazingWebsite.com/wp-admin/*",
+                "https://MyAmazingWebsite.com/wp-admin/*"
+            ],
+            "directory": "C:\\MyAmazingWebsite\\wwwroot\\wp-admin",
+            "id": "33d20500-30c2-11e7-ba36-9929bc9bf561",
+            "indexPage": "index.php",
+            "name": "MyAmazingWebsite wp-admin",
+            "url": "MyAmazingWebsite.com/wp-admin"
+        },
+        {
+            "conditions": [
+                "http://MyAmazingWebsite.com/*",
+                "https://MyAmazingWebsite.com/*"
+            ],
+            "directory": "C:\\MyAmazingWebsite\\wwwroot",
+            "id": "24220f10-30c2-11e7-ba36-9929bc9bf561",
+            "indexPage": "index.html",
+            "name": "MyAmazingWebsite",
+            "url": "MyAmazingWebsite.com"
+        },
+        {
+            "conditions": [
+                "http://MySecondAmazingWebsite.co.uk/*",
+                "https://MySecondAmazingWebsite.co.uk/*"
+            ],
+            "directory": "J:\\MySecondAmazingWebsite",
+            "id": "e7d753b0-34ab-11e7-b747-c18c604cabf7",
+            "indexPage": "index.aspx",
+            "name": "MySecondAmazingWebsite.co.uk",
+            "url": "MySecondAmazingWebsite.co.uk"
+        },
+        {
+            "conditions": [
+                "http://MyNotSoAmazingWebsite.org/*",
+                "https://MyNotSoAmazingWebsite.org/*"
+            ],
+            "directory": "J:\\MyNotSoAmazingWebsite",
+            "id": "bd64de90-55b7-11e7-bd1a-b527e1e10016",
+            "indexPage": "index.htm",
+            "name": "https://MyNotSoAmazingWebsite.org/",
+            "url": "MyNotSoAmazingWebsite.org"
+        }
+    ],
+    "spinner": false
+}

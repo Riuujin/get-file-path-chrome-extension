@@ -1,0 +1,33 @@
+{
+    "version": "1.0.0",
+    "environments": [
+        {
+            "id": "33d20500-30c2-11e7-ba36-9929bc9bf561",
+            "name": "MyAmazingWebsite wp-admin",
+            "url": "MyAmazingWebsite.com/wp-admin",
+            "directory": "C:\\MyAmazingWebsite\\wwwroot\\wp-admin",
+            "indexPage": "index.php"
+        },
+        {
+            "id": "24220f10-30c2-11e7-ba36-9929bc9bf561",
+            "name": "MyAmazingWebsite",
+            "url": "MyAmazingWebsite.com",
+            "directory": "C:\\MyAmazingWebsite\\wwwroot",
+            "indexPage": "index.html"
+        },
+        {
+            "id": "e7d753b0-34ab-11e7-b747-c18c604cabf7",
+            "name": "MySecondAmazingWebsite.co.uk",
+            "url": "MySecondAmazingWebsite.co.uk",
+            "directory": "J:\\MySecondAmazingWebsite",
+            "indexPage": "index.aspx"
+        },
+        {
+            "id": "bd64de90-55b7-11e7-bd1a-b527e1e10016",
+            "name": "https://MyNotSoAmazingWebsite.org/",
+            "url": "MyNotSoAmazingWebsite.org",
+            "directory": "J:\\MyNotSoAmazingWebsite",
+            "indexPage": "index.htm"
+        }
+    ]
+}
