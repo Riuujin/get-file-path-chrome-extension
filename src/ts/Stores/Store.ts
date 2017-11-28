@@ -127,8 +127,10 @@ export default class Store implements IStore {
                 })
             });
         }
+		
+		let allowedVersion = storageData.version === '1.0.0' || storageData.version === '1.0.1';
 
-        if (storageData.version === getVersion() && storageData.environments != null && Array.isArray(storageData.environments)) {
+        if (allowedVersion && storageData.environments != null && Array.isArray(storageData.environments)) {
             storageData.environments.forEach(loadedEnv => {
                 let env = this.getEnvironmentById(loadedEnv.id);
                 if (env == null) {
