@@ -62,14 +62,14 @@ export default class Store implements IStore {
             if (env.isValid) {
 
                 if (/^https?/.test(env.url)) {
-                    if (/\/&/.test(env.url)) {
+                    if (/\/$/.test(env.url)) {
                         results.push({ id: env.id, condition: env.url + '*' });
                     } else {
                         results.push({ id: env.id, condition: env.url + '/*' });
                     }
                 }
                 else {
-                    if (/\/&/.test(env.url)) {
+                    if (/\/$/.test(env.url)) {
                         results.push({ id: env.id, condition: 'http://' + env.url + '*' });
                         results.push({ id: env.id, condition: 'https://' + env.url + '*' });
                     } else {
