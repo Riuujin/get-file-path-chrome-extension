@@ -31,7 +31,7 @@ export default class ConfirmDialog extends React.Component<IDialogProps, { isOpe
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-primary" onClick={()=>{this.setState({isOpen: false});this.props.onOk();}}>Ok</button>
-                    <button type="button" className="btn btn-secondary" onClick={()=>this.setState({isOpen: false})}>Close</button>
+                    <button type="button" className="btn btn-secondary" onClick={()=>this.setState({isOpen: false})}>Cancel</button>
                 </div>
             </dialog>
             <div className="confirm-dialog__overlay"></div>

@@ -1,5 +1,3 @@
-
-
 import { action } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import * as React from 'react';
@@ -37,10 +35,10 @@ export default class EnvironmentListView extends React.Component {
         this.fileField.className = 'hidden';
         this.fileField.onchange = () => {
 
-            var file = this.fileField.files[0];
-            var reader = new FileReader();
+            let file = this.fileField.files[0];
+            let reader = new FileReader();
             reader.onload = (e) => {
-                var data = JSON.parse(reader.result);
+                let data = JSON.parse(reader.result as any);
                 this.injected.store.import(data)
             };
             reader.readAsText(file);
