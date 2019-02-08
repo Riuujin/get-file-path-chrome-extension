@@ -6,8 +6,9 @@ import UnitTestDataStorage from '../src/ts/StorageProviders/UnitTestDataStorage'
 import IStoreStorageData from '../src/ts/Stores/IStoreStorageData';
 
 //NOTE: Make sure Utils.getVersion returns the latest version!
-
+// @ts-ignore
 const importData_v0_0_6 = require('./export v0.0.6.json');
+// @ts-ignore
 const importData_v1_0_0 = require('./export v1.0.0.json');
 
 
