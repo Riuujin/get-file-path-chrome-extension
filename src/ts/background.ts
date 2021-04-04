@@ -1,10 +1,9 @@
-import { configure } from 'mobx';
+import { configure, action } from 'mobx';
 import Store from './Stores/Store';
 import ChromeExtensionStorage from './StorageProviders/ChromeExtensionStorage';
 import { parse } from 'url';
-import { action } from 'mobx/lib/api/action';
 configure({
-    enforceActions: true
+    enforceActions: 'never'
 });
 const manifest = chrome.runtime.getManifest();
 const clipboardholder: HTMLInputElement = document.getElementById('clipboard') as HTMLInputElement;
@@ -35,7 +34,7 @@ const storageProvider = new ChromeExtensionStorage();
 const store = new Store(storageProvider, true, false, onStoreLoaded);
 
 function onStoreLoaded() {
-    const rules = store .rules;
+    const rules = store.rules;
     let conditions: Array<string> = [];
 
     rules.forEach(rule => {

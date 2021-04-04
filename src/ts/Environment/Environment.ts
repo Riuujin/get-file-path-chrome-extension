@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, makeObservable } from 'mobx';
 import IEnvironment from './IEnvironment';
 
 export default class Environment implements IEnvironment {
@@ -27,6 +27,7 @@ export default class Environment implements IEnvironment {
 
 
     constructor(id: string) {
+        makeObservable(this);
         this.id = id;
         this.name = '';
         this.url = '';

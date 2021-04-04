@@ -1,14 +1,16 @@
-import { action } from 'mobx';
-import { observer, inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import Environment from '../Environment/Environment';
 import EnvironmentView from './EnvironmentView';
-import { generateId } from '../Utils';
 import IStore from '../Stores/IStore';
 
 @inject('store')
 @observer
 export default class EnvironmentListView extends React.Component {
+    constructor(props: {}, context: any) {
+        super(props, context);
+    }
+
     private get injected(): { store: IStore } {
         return this.props as { store: IStore };
     }
