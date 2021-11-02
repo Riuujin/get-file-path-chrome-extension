@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
 
 const isProduction = process.argv.indexOf('--mode=production') >= 0;
 let plugins = [];
@@ -35,7 +36,12 @@ plugins.push(new CopyWebpackPlugin({
 }));
 
 
+
+
 module.exports = {
+    optimization: {
+        minimize: false //Don't minimize for now, causes bugs in background.js > injectedFunction
+    },
     entry: {
         'js/settings.js': './src/ts/settings.tsx',
         'js/background.js': './src/ts/background.ts'
