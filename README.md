@@ -7,10 +7,14 @@ Get the file path for the specified sites.
 
 # Scripts
 + > npm run build
-⋅⋅⋅ To build a development build.
+
+    To build a development build.
 + > npm run watch
-⋅⋅⋅ To build a development build and watch for changes.
+
+    To build a development build and watch for changes.
 + > npm run production
-⋅⋅⋅ To build a production build.
+
+    To build a production build.
 + > npm run test
-⋅⋅⋅ To run the unit tests.
+
+    To run the unit tests.
