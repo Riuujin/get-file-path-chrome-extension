@@ -1,0 +1,69 @@
+@import "~bootstrap/scss/bootstrap";
+$fixed-buttonbar--height: 75px;
+.fixed-content {
+    padding-bottom: $fixed-buttonbar--height;
+}
+
+.fixed-buttonbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: $fixed-buttonbar--height;
+    width: 100%;
+    display: flex;
+    padding: 0 50px;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid $gray-200;
+    background: #fff;
+    z-index: 5;
+
+    button {
+        margin-right: 10px;
+    }
+
+    button:last-child{
+        margin-right: 0;
+    }
+}
+
+.collumn-small {
+    width: 100px;
+}
+
+.confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    &__dialog {
+        width: 500px;
+        position: absolute;
+        display: block;
+        z-index: 15;
+    }
+    &__overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #ccc;
+        opacity: 0.5;
+    }
+}
+
+.url-github{
+    height:32px;
+    width: 32px;
+    background: url(../images/GitHub-Mark-Light-32px.png) no-repeat;
+}
+
+.hidden{
+    display: none;
+}
