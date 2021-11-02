@@ -1,4 +1,4 @@
-import { action } from 'mobx';
+import { action, makeObservable } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import ConfirmDialog from './Dialog'
@@ -18,12 +18,17 @@ interface IEnvironmentview {
 export default class EnvironmentView extends React.Component<IEnvironmentview> {
     private confirmDialog: ConfirmDialog | null;
 
+    constructor(props: IEnvironmentview, context: any) {
+        super(props, context);
+        makeObservable(this);
+    }
+
     public render() {
         const env = this.props.env;
         return (
             <tr className="was-validated">
                 <td><input type='text' defaultValue={env.name} onChange={this.onRename} placeholder="localhost" className="form-control" /></td>
-                <td><input type='text' defaultValue={env.url} onChange={this.onUrlChange} placeholder="https://localhost/yourPath/" required className="form-control"/></td>
+                <td><input type='text' defaultValue={env.url} onChange={this.onUrlChange} placeholder="https://localhost/yourPath/" required className="form-control" /></td>
                 <td><input type='text' defaultValue={env.directory} onChange={this.onDirChange} placeholder="c:\mywebsites\yourPath" required className="form-control" /></td>
                 <td><input type='text' defaultValue={env.indexPage} onChange={this.onIndexPageChange} placeholder="index.html" required className="form-control" /></td>
                 <td className="collumn-small">

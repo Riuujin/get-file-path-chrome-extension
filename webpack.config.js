@@ -34,11 +34,13 @@ const extractSass = new MiniCssExtractPlugin({
 });
 plugins.push(extractSass);
 
-plugins.push(new CopyWebpackPlugin([
-    'src/manifest.json',
-    { from: 'src/images', to: 'images' },
-    { from: 'src/icons', to: 'icons' }
-]));
+plugins.push(new CopyWebpackPlugin({
+    patterns: [
+        'src/manifest.json',
+        { from: 'src/images', to: 'images' },
+        { from: 'src/icons', to: 'icons' }
+    ]
+}));
 
 
 module.exports = {

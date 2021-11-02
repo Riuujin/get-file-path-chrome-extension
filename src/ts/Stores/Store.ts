@@ -1,4 +1,4 @@
-import { observable, autorun, action, toJS } from 'mobx';
+import { observable, autorun, action, toJS, makeObservable } from 'mobx';
 import Environment from '../Environment/Environment';
 import { generateId, getVersion } from '../Utils';
 import IStore from './IStore';
@@ -15,6 +15,7 @@ export default class Store implements IStore {
     @observable public environments: Array<IEnvironment> = [];
 
     constructor(storageProvider?: IStoreStorageProvider, loadData: boolean = true, saveOnChange: boolean = false, onLoaded?: () => void) {
+        makeObservable(this);
         if (onLoaded != null) {
             this.onLoaded = onLoaded;
         }
@@ -128,7 +129,7 @@ export default class Store implements IStore {
             });
         }
 
-        const allowedVersion = ['1.0.0', '1.0.1', '1.0.2', '1.0.3','1.0.4'];
+        const allowedVersion = ['1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.0.5'];
         let versionAllowed = allowedVersion.indexOf(storageData.version) > -1;
 
         if (versionAllowed && storageData.environments != null && Array.isArray(storageData.environments)) {
