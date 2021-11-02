@@ -18,7 +18,7 @@ export default class EnvironmentListView extends React.Component {
     public render() {
         return <div className="fixed-content">
             <table className="table table-hover">
-                <thead className="thead-dark">
+                <thead className="table-dark">
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Url</th>

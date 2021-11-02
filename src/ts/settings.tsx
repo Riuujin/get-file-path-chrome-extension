@@ -8,7 +8,7 @@ import Store from './Stores/Store';
 import ChromeExtensionStorage from './StorageProviders/ChromeExtensionStorage';
 
 // @ts-ignore
-require('../style/style.scss');//Ensure styling 
+import '../style/style.scss'
 configure({
     enforceActions: 'never'
 });

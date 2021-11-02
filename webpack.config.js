@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
-const isProduction = process.argv.indexOf('-p') >= 0;
+const isProduction = process.argv.indexOf('--mode=production') >= 0;
 let plugins = [];
 if (isProduction) {
     plugins.push(new webpack.DefinePlugin({
@@ -22,13 +22,6 @@ plugins.push(new HtmlWebpackPlugin({
     chunks: ['js/settings.js']
 }));
 
-plugins.push(new HtmlWebpackPlugin({
-    template: './src/background.html',
-    hash: false,
-    filename: 'background.html',
-    chunks: ['js/background.js']
-}));
-
 const extractSass = new MiniCssExtractPlugin({
     filename: '/css/style.css'
 });
@@ -37,7 +30,6 @@ plugins.push(extractSass);
 plugins.push(new CopyWebpackPlugin({
     patterns: [
         'src/manifest.json',
-        { from: 'src/images', to: 'images' },
         { from: 'src/icons', to: 'icons' }
     ]
 }));
@@ -67,7 +59,7 @@ module.exports = {
     module: {
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+            { test: /\.tsx?$/, loader: 'ts-loader', exclude: /node_modules/},
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
