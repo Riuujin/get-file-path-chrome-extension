@@ -39,9 +39,6 @@ plugins.push(new CopyWebpackPlugin({
 
 
 module.exports = {
-    optimization: {
-        minimize: false //Don't minimize for now, causes bugs in background.js > injectedFunction
-    },
     entry: {
         'js/settings.js': './src/ts/settings.tsx',
         'js/background.js': './src/ts/background.ts'

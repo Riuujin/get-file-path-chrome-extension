@@ -144,7 +144,10 @@ function injectedFunction(filePath: string) {
     clipboardholder.value = filePath;
     clipboardholder.select();
     document.execCommand("Copy");
-    clipboardholder.remove();
+
+    setTimeout(() => {
+        clipboardholder.remove();
+    }, 500);
 
     return true;
 }
