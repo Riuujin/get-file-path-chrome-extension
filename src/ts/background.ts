@@ -1,9 +1,11 @@
-import { useStrict } from 'mobx';
+import { configure } from 'mobx';
 import Store from './Stores/Store';
 import ChromeExtensionStorage from './StorageProviders/ChromeExtensionStorage';
 import { parse } from 'url';
 import { action } from 'mobx/lib/api/action';
-useStrict(true);
+configure({
+    enforceActions: true
+});
 const manifest = chrome.runtime.getManifest();
 const clipboardholder: HTMLInputElement = document.getElementById('clipboard') as HTMLInputElement;
 

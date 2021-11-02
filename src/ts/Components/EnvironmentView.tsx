@@ -22,9 +22,9 @@ export default class EnvironmentView extends React.Component<IEnvironmentview> {
         const env = this.props.env;
         return (
             <tr className="was-validated">
-                <td><input type='text' defaultValue={env.name} onChange={this.onRename} placeholder="My website" className="form-control" /></td>
-                <td><input type='text' defaultValue={env.url} onChange={this.onUrlChange} placeholder="mywebsite.com" required className="form-control" /></td>
-                <td><input type='text' defaultValue={env.directory} onChange={this.onDirChange} placeholder="/mywebsite/wwwroot/" required className="form-control" /></td>
+                <td><input type='text' defaultValue={env.name} onChange={this.onRename} placeholder="localhost" className="form-control" /></td>
+                <td><input type='text' defaultValue={env.url} onChange={this.onUrlChange} placeholder="https://localhost/yourPath/" required className="form-control"/></td>
+                <td><input type='text' defaultValue={env.directory} onChange={this.onDirChange} placeholder="c:\mywebsites\yourPath" required className="form-control" /></td>
                 <td><input type='text' defaultValue={env.indexPage} onChange={this.onIndexPageChange} placeholder="index.html" required className="form-control" /></td>
                 <td className="collumn-small">
                     <button onClick={this.onRemovePrompt} className="btn btn-danger">Remove</button>

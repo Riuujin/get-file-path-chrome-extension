@@ -1,4 +1,4 @@
-import { observable, computed, action, autorun, toJS, useStrict } from 'mobx';
+import { observable, computed, action, autorun, toJS, configure  } from 'mobx';
 import { observer, Provider } from 'mobx-react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -8,7 +8,9 @@ import Store from './Stores/Store';
 import ChromeExtensionStorage from './StorageProviders/ChromeExtensionStorage';
 
 require('../style/style.scss');//Ensure styling 
-useStrict(true);
+configure({
+    enforceActions: true
+});
 
 let initialLoadComplete = false;
 const storageProvider = new ChromeExtensionStorage();

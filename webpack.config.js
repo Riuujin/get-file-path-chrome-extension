@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
@@ -9,7 +9,7 @@ let plugins = [];
 if (isProduction) {
     plugins.push(new webpack.DefinePlugin({
         "process.env": {
-            NODE_ENV: JSON.stringify( "production")
+            NODE_ENV: JSON.stringify("production")
         }
     }));
 }
@@ -29,7 +29,7 @@ plugins.push(new HtmlWebpackPlugin({
     chunks: ['js/background.js']
 }));
 
-const extractSass = new ExtractTextPlugin({
+const extractSass = new MiniCssExtractPlugin({
     filename: '/css/style.css'
 });
 plugins.push(extractSass);
@@ -61,7 +61,7 @@ module.exports = {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: ['.ts', '.tsx', '.js', '.json']
     },
-    
+
     module: {
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
@@ -70,7 +70,7 @@ module.exports = {
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
 
-            { test: /\.scss$/, use: extractSass.extract({ use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }], fallback: 'style-loader' }) },
+            { test: /\.(sa|sc|c)ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']},
 
             { test: /\.(png|jpg|gif)$/, use: [{ loader: 'url-loader', options: { limit: 8192 } }] }
         ]
