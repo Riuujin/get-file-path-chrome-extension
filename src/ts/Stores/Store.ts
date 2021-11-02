@@ -128,7 +128,7 @@ export default class Store implements IStore {
             });
         }
 
-        const allowedVersion = ['1.0.0', '1.0.1', '1.0.2'];
+        const allowedVersion = ['1.0.0', '1.0.1', '1.0.2', '1.0.3'];
         let versionAllowed = allowedVersion.indexOf(storageData.version) > -1;
 
         if (versionAllowed && storageData.environments != null && Array.isArray(storageData.environments)) {
