@@ -174,7 +174,7 @@ var Settings = React.createClass({
               <span className="brand-logo">Settings</span>
                 <ul className="right hide-on-med-and-down">
                   <li><a href="#!" onClick={this.openChangelog}>Changelog</a></li>
-                  <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                  <li><a href="https://github.com/Riuujin/get-file-path-chrome-extension" target="_blank">GitHub</a></li>
                 </ul>
             </div>
           </nav>

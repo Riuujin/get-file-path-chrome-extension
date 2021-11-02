@@ -38,7 +38,7 @@ module.exports = {
         sets: [{
             src: src + '/**',
             dest: dest,
-            exclude: ['*.jsx', '*.js', /scss/, /vendor/]
+            exclude: ['*.jsx', '*.js', /scss/, /vendor/, /lib/]
         }, {
             src: './node_modules/materialize-css/font/**/*',
             dest: dest + '/font',
