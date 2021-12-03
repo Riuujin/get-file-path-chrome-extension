@@ -32,7 +32,6 @@ const storageProvider = new ChromeExtensionStorage();
 const store = new Store(storageProvider, true, false, onStoreLoaded);
 
 function onStoreLoaded() {
-    debugger;
     const rules = store.rules;
     let conditions: Array<string> = [];
 
@@ -136,18 +135,25 @@ function displayErrorNotification() {
 }
 
 function injectedFunction(filePath: string) {
-    let clipboardholder = document.createElement('textarea');
-    clipboardholder.style.position = 'absolute';
-    clipboardholder.style.top = '-9999px';
-    clipboardholder.style.left = '-9999px';
-    document.body.appendChild(clipboardholder);
-    clipboardholder.value = filePath;
-    clipboardholder.select();
-    document.execCommand("Copy");
+    const oldFocus: any = document.activeElement;
+    let input = document.createElement('textarea');
+    document.body.appendChild(input);
+    input.style.position = 'fixed';
+    input.style.zIndex = '-999';
+    input.style.top = '50%';
+    input.style.left = '50%';
+    input.style.margin = '-100px 0 0 -100px';
+    input.style.width = '200px';
+    input.style.height = '200px';
+    input.value = filePath;
+    input.focus();
+    input.select();
+    document.execCommand("copy");
+    input.remove();
 
-    setTimeout(() => {
-        clipboardholder.remove();
-    }, 500);
+    if (oldFocus != null) {
+        oldFocus.focus();
+    }
 
     return true;
 }
