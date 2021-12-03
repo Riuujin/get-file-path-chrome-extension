@@ -90,18 +90,13 @@ function onStoreLoaded() {
                         }
 
                         success = true;
-
                         chrome.scripting.executeScript({
                             target: { tabId: tabs.id },
-                            func: injectedFunction,
+                            func: (filePath: string) => {
+                               navigator.clipboard.writeText(filePath);
+                            },
                             args: [filePath]
-                        },
-                            (injectionResults) => {
-                                for (const frameResult of injectionResults)
-                                    if (!frameResult.result) {
-                                        displayErrorNotification();
-                                    }
-                            });
+                        });
                     }
                 }
 
@@ -132,28 +127,4 @@ function displayErrorNotification() {
     }
 
     chrome.notifications.create(null, notificationOptions);
-}
-
-function injectedFunction(filePath: string) {
-    const oldFocus: any = document.activeElement;
-    let input = document.createElement('textarea');
-    document.body.appendChild(input);
-    input.style.position = 'fixed';
-    input.style.zIndex = '-999';
-    input.style.top = '50%';
-    input.style.left = '50%';
-    input.style.margin = '-100px 0 0 -100px';
-    input.style.width = '200px';
-    input.style.height = '200px';
-    input.value = filePath;
-    input.focus();
-    input.select();
-    document.execCommand("copy");
-    input.remove();
-
-    if (oldFocus != null) {
-        oldFocus.focus();
-    }
-
-    return true;
 }

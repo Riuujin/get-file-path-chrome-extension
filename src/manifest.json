@@ -1,7 +1,7 @@
 {
   "name": "Get file path",
   "description": "Get the file path for the specified sites.",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "manifest_version": 3,
   "icons": {
     "16": "icons/icon16.png",
