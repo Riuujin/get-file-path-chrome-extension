@@ -24,7 +24,7 @@ plugins.push(new HtmlWebpackPlugin({
 }));
 
 const extractSass = new MiniCssExtractPlugin({
-    filename: '/css/style.css'
+    filename: './css/style.css'
 });
 plugins.push(extractSass);
 
