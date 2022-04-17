@@ -98,7 +98,30 @@ chrome.contextMenus.onClicked.addListener((info, tabs) => {
                 chrome.scripting.executeScript({
                     target: { tabId: tabs.id },
                     func: (filePath: string) => {
-                        navigator.clipboard.writeText(filePath);
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(filePath);
+                        }
+                        else {
+                            const oldFocus: any = document.activeElement;
+                            let input = document.createElement('textarea');
+                            document.body.appendChild(input);
+                            input.style.position = 'fixed';
+                            input.style.zIndex = '-999';
+                            input.style.top = '50%';
+                            input.style.left = '50%';
+                            input.style.margin = '-100px 0 0 -100px';
+                            input.style.width = '200px';
+                            input.style.height = '200px';
+                            input.value = filePath;
+                            input.focus();
+                            input.select();
+                            document.execCommand("copy");
+                            input.remove();
+
+                            if (oldFocus != null) {
+                                oldFocus.focus();
+                            }
+                        }
                     },
                     args: [filePath]
                 });
