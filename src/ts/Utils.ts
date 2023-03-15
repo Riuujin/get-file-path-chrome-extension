@@ -12,5 +12,5 @@ export const getVersion = () => {
     if (typeof (chrome) !== 'undefined') {
         return chrome.runtime.getManifest().version;
     }
-    return '1.1.6';
+    return '1.1.7';
 }
