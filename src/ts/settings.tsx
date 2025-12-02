@@ -1,7 +1,7 @@
 import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import EnvironmentListView from './Components/EnvironmentListView';
 import ButtonBar from './Components/ButtonBar';
 import Store from './Stores/Store';
@@ -17,13 +17,12 @@ const storageProvider = new ChromeExtensionStorage();
 const store = new Store(storageProvider, true, true);
 
 
-ReactDOM.render(
-    <Provider store={store}>
+const root = createRoot(document.getElementById('root'));
+root.render(<Provider store={store}>
         <div className="app">
             <EnvironmentListView />
             <ButtonBar />
         </div>
-    </Provider>
-    , document.getElementById('root'));
+    </Provider>);
 
 
