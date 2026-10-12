@@ -1,9 +1,4 @@
-//const del = require('del');
+import fs from 'node:fs';
 
-//del(['dist']).then(paths => {
-//   console.log('Deleted files and folders:\n', paths.join('\n'));
-//});
-import { deleteAsync } from 'del';
-deleteAsync(['dist']).then(paths => {
-   console.log('Deleted files and folders:\n', paths.join('\n'));
-});
+fs.rmSync('dist', { recursive: true, force: true });
+console.log('Deleted dist directory.');

@@ -1,4 +1,4 @@
-import { observable, autorun, action, toJS, makeObservable } from 'mobx';
+import { autorun, toJS, makeAutoObservable } from 'mobx';
 import Environment from '../Environment/Environment';
 import { generateId, getVersion } from '../Utils';
 import IStore from './IStore';
@@ -11,11 +11,10 @@ export default class Store implements IStore {
     private storageProvider: IStoreStorageProvider;
 
     public onLoaded: () => void;
-
-    @observable public environments: Array<IEnvironment> = [];
+    public environments: Array<IEnvironment> = [];
 
     constructor(storageProvider?: IStoreStorageProvider, loadData: boolean = true, saveOnChange: boolean = false, onLoaded?: () => void) {
-        makeObservable(this);
+        makeAutoObservable(this);
         if (onLoaded != null) {
             this.onLoaded = onLoaded;
         }
@@ -84,7 +83,6 @@ export default class Store implements IStore {
         return results;
     }
 
-    @action
     public load(data: any): void {
         this.environments = [];
         this.import(data);
@@ -102,17 +100,14 @@ export default class Store implements IStore {
 
     public export(): IStoreStorageData {
         let data: IStoreStorageData = Object.assign({}, { version: getVersion() }, toJS(this));
-        //Remove data we dont want to export.
-        delete (<any>data).storageProvider
+        delete (<any>data).storageProvider;
         return data;
-    };
+    }
 
-    @action
     public import(data: any): void {
         let storageData: IStoreStorageData = data as IStoreStorageData;
 
         if (data.version === undefined && data.rules != null && Array.isArray(data.rules)) {
-            //assume v0.0.6
             storageData = {
                 version: getVersion(),
                 environments: []
@@ -125,12 +120,12 @@ export default class Store implements IStore {
                     url: rule.url,
                     directory: rule.directory,
                     indexPage: rule.indexPage,
-                })
+                });
             });
         }
 
-        const allowedVersion = ['1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.0.5', '1.1.0', '1.1.1', '1.1.2', '1.1.3', '1.1.4', '1.1.5', '1.1.6','1.1.7','1.1.8'];
-        let versionAllowed = allowedVersion.indexOf(storageData.version) > -1;
+        const allowedVersion = ['1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.0.5', '1.1.0', '1.1.1', '1.1.2', '1.1.3', '1.1.4', '1.1.5', '1.1.6', '1.1.7', '1.1.8', '1.1.9'];
+        const versionAllowed = allowedVersion.indexOf(storageData.version) > -1;
 
         if (versionAllowed && storageData.environments != null && Array.isArray(storageData.environments)) {
             storageData.environments.forEach(loadedEnv => {
@@ -153,7 +148,6 @@ export default class Store implements IStore {
         return env;
     }
 
-    @action
     public addEnvironment(id?: string): IEnvironment {
         if (id == null) {
             id = generateId();
@@ -167,13 +161,11 @@ export default class Store implements IStore {
         this.removeEnvironmentById(env.id);
     }
 
-    @action
     private removeEnvironmentById(id: string) {
         const i = this.environments.findIndex(env => env.id === id);
         this.environments.splice(i, 1);
     }
 
-    @action
     public moveEnvironmentDown(env: IEnvironment) {
         const i = this.environments.findIndex(e => e.id === env.id);
 
@@ -183,7 +175,6 @@ export default class Store implements IStore {
         }
     }
 
-    @action
     public moveEnvironmentUp(env: IEnvironment) {
         const i = this.environments.findIndex(e => e.id === env.id);
         if (i > 0) {

@@ -1,27 +1,24 @@
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import * as React from 'react';
-import Environment from '../Environment/Environment';
-import EnvironmentView from './EnvironmentView';
 import IStore from '../Stores/IStore';
 
-@inject('store')
-@observer
-export default class EnvironmentListView extends React.Component {
+interface IButtonBarProps {
+    store: IStore;
+}
+
+const ButtonBar = observer(class ButtonBar extends React.Component<IButtonBarProps> {
     private fileField: HTMLInputElement;
 
-    constructor(props: {}, context: any) {
+    constructor(props: IButtonBarProps, context: any) {
         super(props, context);
     }
 
-    private get injected(): { store: IStore } {
-        return this.props as { store: IStore };
-    }
-
     public render() {
+        const { store } = this.props;
         return <div className="fixed-buttonbar">
             <button type="button" className="btn btn-light" onClick={() => this.import()} >Import</button>
-            <button type="button" className="btn btn-light" onClick={() => this.export()} disabled={this.injected.store.environments.length === 0}>Export</button>
-            <button type="button" onClick={() => this.injected.store.addEnvironment()} className="btn btn-primary">New</button>
+            <button type="button" className="btn btn-light" onClick={() => this.export()} disabled={store.environments.length === 0}>Export</button>
+            <button type="button" onClick={() => store.addEnvironment()} className="btn btn-primary">New</button>
         </div>
     }
 
@@ -31,24 +28,20 @@ export default class EnvironmentListView extends React.Component {
             this.fileField = null;
         }
 
-
         this.fileField = document.createElement('input');
         this.fileField.type = 'file';
         this.fileField.className = 'hidden';
         this.fileField.onchange = () => {
-
             let file = this.fileField.files[0];
             let reader = new FileReader();
-            reader.onload = (e) => {
+            reader.onload = () => {
                 let data = JSON.parse(reader.result as any);
-                this.injected.store.import(data)
+                this.props.store.import(data);
             };
             reader.readAsText(file);
 
-
             this.fileField.remove();
-        }
-
+        };
 
         document.getElementsByTagName('body')[0].appendChild(this.fileField);
         this.fileField.click();
@@ -56,11 +49,13 @@ export default class EnvironmentListView extends React.Component {
 
     private export() {
         let a = document.createElement('a');
-        a.href = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.injected.store.export()));
+        a.href = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.store.export()));
         a.download = 'export.json';
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
     }
-}
+});
+
+export default ButtonBar;

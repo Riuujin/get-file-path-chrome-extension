@@ -1,4 +1,3 @@
-import { action, makeObservable } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import ConfirmDialog from './Dialog'
@@ -13,14 +12,11 @@ interface IEnvironmentview {
     canMoveUp: boolean;
 }
 
-
-@observer
-export default class EnvironmentView extends React.Component<IEnvironmentview> {
+const EnvironmentView = observer(class EnvironmentView extends React.Component<IEnvironmentview> {
     private confirmDialog: ConfirmDialog | null;
 
     constructor(props: IEnvironmentview, context: any) {
         super(props, context);
-        makeObservable(this);
     }
 
     public render() {
@@ -45,22 +41,22 @@ export default class EnvironmentView extends React.Component<IEnvironmentview> {
         );
     }
 
-    @action private onRename = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onRename = (event: React.ChangeEvent<HTMLInputElement>) => {
         const env = this.props.env;
         env.name = event.currentTarget.value;
     }
 
-    @action private onUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const env = this.props.env;
         env.url = event.currentTarget.value;
     }
 
-    @action private onDirChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onDirChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const env = this.props.env;
         env.directory = event.currentTarget.value;
     }
 
-    @action private onIndexPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onIndexPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const env = this.props.env;
         env.indexPage = event.currentTarget.value;
     }
@@ -82,4 +78,6 @@ export default class EnvironmentView extends React.Component<IEnvironmentview> {
             this.confirmDialog.open();
         }
     }
-}
+});
+
+export default EnvironmentView;

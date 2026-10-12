@@ -9,8 +9,8 @@ export const generateId = () => {
 };
 
 export const getVersion = () => {
-    if (typeof (chrome) !== 'undefined') {
+    if (typeof (chrome) !== 'undefined' && chrome.runtime && chrome.runtime.getManifest) {
         return chrome.runtime.getManifest().version;
     }
-    return '1.1.8';
+    return '1.1.9';
 }

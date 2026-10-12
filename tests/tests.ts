@@ -5,7 +5,7 @@ import { generateId, getVersion } from '../src/ts/Utils'
 import UnitTestDataStorage from '../src/ts/StorageProviders/UnitTestDataStorage'
 import IStoreStorageData from '../src/ts/Stores/IStoreStorageData';
 
-//NOTE: Make sure Utils.getVersion returns the latest version and the latest version is added to the 'allowedVersion' array!
+//NOTE: Keep the version in Utils.getVersion aligned with the extension manifest/package version.
 // @ts-ignore
 const importData_v0_0_6 = require('./export v0.0.6.json');
 // @ts-ignore
@@ -57,6 +57,28 @@ describe('Store', () => {
             expect(rules[0].condition).to.be.equal('http://localhost/*');
             expect(rules[1].condition).to.be.equal('https://localhost/*');
 
+        });
+
+        it('should import the current app version', () => {
+            const store = new Store();
+            const currentVersion = getVersion();
+            const importData: IStoreStorageData = {
+                version: currentVersion,
+                environments: [
+                    {
+                        id: generateId(),
+                        directory: 'c:\\wwwroot\\',
+                        indexPage: 'index.html',
+                        name: 'wwwroot',
+                        url: 'localhost'
+                    }
+                ]
+            };
+
+            store.import(importData);
+            expect(store.environments).to.have.lengthOf(1);
+            expect(store.environments[0].url).to.equal('localhost');
+            expect(store.environments[0].isValid).to.equal(true);
         });
 
         it('should not remove current environments', () => {

@@ -1,21 +1,19 @@
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import * as React from 'react';
-import Environment from '../Environment/Environment';
 import EnvironmentView from './EnvironmentView';
 import IStore from '../Stores/IStore';
 
-@inject('store')
-@observer
-export default class EnvironmentListView extends React.Component {
-    constructor(props: {}, context: any) {
+interface IEnvironmentListViewProps {
+    store: IStore;
+}
+
+const EnvironmentListView = observer(class EnvironmentListView extends React.Component<IEnvironmentListViewProps> {
+    constructor(props: IEnvironmentListViewProps, context: any) {
         super(props, context);
     }
 
-    private get injected(): { store: IStore } {
-        return this.props as { store: IStore };
-    }
-
     public render() {
+        const { store } = this.props;
         return <div className="fixed-content">
             <table className="table table-hover">
                 <thead className="table-dark">
@@ -31,13 +29,13 @@ export default class EnvironmentListView extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.injected.store.environments.map(env => {
-                        const canMoveUp = this.injected.store.environments[0].id !== env.id;
-                        const canMoveDown = this.injected.store.environments[this.injected.store.environments.length - 1].id !== env.id;
+                    {store.environments.map(env => {
+                        const canMoveUp = store.environments[0].id !== env.id;
+                        const canMoveDown = store.environments[store.environments.length - 1].id !== env.id;
                         return <EnvironmentView env={env} key={env.id}
-                            onRemove={() => this.injected.store.removeEnvironment(env)}
-                            onMoveDown={() => this.injected.store.moveEnvironmentDown(env)}
-                            onMoveUp={() => this.injected.store.moveEnvironmentUp(env)}
+                            onRemove={() => store.removeEnvironment(env)}
+                            onMoveDown={() => store.moveEnvironmentDown(env)}
+                            onMoveUp={() => store.moveEnvironmentUp(env)}
                             canMoveUp={canMoveUp} canMoveDown={canMoveDown} />
                     }
                     )}
@@ -45,5 +43,6 @@ export default class EnvironmentListView extends React.Component {
             </table>
         </div>
     }
+});
 
-}
+export default EnvironmentListView;
